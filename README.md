@@ -6,4 +6,10 @@
 
 <img  width="1460" src="https://github.com/usikedeepika/Travel-Itenary-Frontend/blob/main/images/Ai%20reponse%20based%20%20on%20our%20search.png?raw=true">
 
-<img  width="1460" src="https://github.com/usikedeepika/Travel-Itenary-Frontend/blob/main/travel-itenarary-frontend-main/images/Screenshot%20(447).png"/>
+<img  width="1460" src="https://github.com/usikedeepika/Travel-Itenary-Frontend/blob/main/images/Ai%20response2.png?raw=true">
+
+<img  width="1460" src="https://github.com/usikedeepika/Travel-Itenary-Frontend/blob/main/images/TravelHistor.png?raw=true">
+
+<img  width="1460" src="https://github.com/usikedeepika/Travel-Itenary-Frontend/blob/main/images/TravelReviews.png?raw=true">
+
+<img  width="1460" src="https://github.com/usikedeepika/Travel-Itenary-Frontend/blob/main/images/Review2.png?raw=true">

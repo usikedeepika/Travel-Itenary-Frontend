@@ -13,3 +13,10 @@
 <img  width="1460" src="https://github.com/usikedeepika/Travel-Itenary-Frontend/blob/main/images/TravelReviews.png?raw=true">
 
 <img  width="1460" src="https://github.com/usikedeepika/Travel-Itenary-Frontend/blob/main/images/Review2.png?raw=true">
+
+
+<img  width="1460" src="https://github.com/usikedeepika/Travel-Itenary-Frontend/blob/main/images/Payment%20Dashboard.png?raw=true">
+
+<img  width="1460" src="https://github.com/usikedeepika/Travel-Itenary-Frontend/blob/main/images/Payment%20Receipt.png?raw=true">
+
+<img  width="1460" src="https://github.com/usikedeepika/Travel-Itenary-Frontend/blob/main/images/Payments%20dashboard%20showing%20the%20current%20plan.png?raw=true">

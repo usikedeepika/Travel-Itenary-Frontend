@@ -1,6 +1,6 @@
 class ItineraryService {
     constructor() {
-        this.baseUrl = 'http://localhost:8080'; 
+        this.baseUrl = 'http://localhost:8081'; 
         this.apiEndpoint = '/api/itineraries';
     }
 

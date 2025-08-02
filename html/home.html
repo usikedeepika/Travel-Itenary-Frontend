@@ -393,10 +393,21 @@
                         <li class="nav-item" data-guest-only><a class="nav-link" href="signin.html">Sign in</a></li>
                         
                         <!-- Authenticated Navigation (shown when logged in) -->
-                        <li class="nav-item" data-auth-only style="display: none;"><a class="nav-link" href="home.html">Home</a></li>
+                        <li class="nav-item" data-auth-only style="display: none;"><a class="nav-link active" href="home.html">Home</a></li>
                         <li class="nav-item" data-auth-only style="display: none;"><a class="nav-link" href="history.html">History</a></li>
-                        <li class="nav-item" data-auth-only style="display: none;"><a class="nav-link" href="#">Reviews</a></li>
-                        <li class="nav-item" data-auth-only style="display: none;"><a class="nav-link" href="#">Newsletter</a></li>
+                        <li class="nav-item" data-auth-only style="display: none;"><a class="nav-link" href="reviews.html">Reviews</a></li>
+                        <li class="nav-item" data-auth-only style="display: none;"><a class="nav-link" href="payments.html">Payments</a></li>
+                        <li class="nav-item" data-auth-only style="display: none;"><a class="nav-link" href="newsletter.html">Newsletter</a></li>
+                        
+                        <!-- Membership Badge -->
+                        <li class="nav-item" data-auth-only style="display: none;">
+                            <span class="nav-link">
+                                <span class="badge bg-primary" id="membershipBadge" style="display: none;">
+                                    <i class="fas fa-crown me-1"></i>
+                                    <span id="membershipType">Free</span>
+                                </span>
+                            </span>
+                        </li>
                         
                         <!-- User Info and Logout -->
                         <li class="nav-item dropdown" data-auth-only style="display: none;">
@@ -711,10 +722,16 @@
                 const isLoggedIn = auth.isAuthenticated();
                 const currentUser = auth.getCurrentUser();
                 
+                console.log('Auth check - isLoggedIn:', isLoggedIn);
+                console.log('Auth check - currentUser:', currentUser);
+                
                 // Elements to show/hide based on auth state
                 const guestElements = document.querySelectorAll('[data-guest-only]');
                 const authElements = document.querySelectorAll('[data-auth-only]');
                 const userNameElements = document.querySelectorAll('[data-user-name]');
+                
+                console.log('Found guest elements:', guestElements.length);
+                console.log('Found auth elements:', authElements.length);
                 
                 if (isLoggedIn && currentUser) {
                     // User is logged in - show authenticated nav, hide guest nav
@@ -725,13 +742,37 @@
                     const displayName = currentUser.firstName || currentUser.userName || 'User';
                     userNameElements.forEach(el => el.textContent = displayName);
                     
+                    // Update membership display
+                    const membershipBadge = document.getElementById('membershipBadge');
+                    const membershipType = document.getElementById('membershipType');
+                    if (currentUser.membershipPlan && membershipBadge && membershipType) {
+                        membershipBadge.style.display = 'inline-block';
+                        membershipType.textContent = currentUser.membershipPlan;
+                        
+                        // Change badge color based on plan
+                        membershipBadge.className = 'badge';
+                        if (currentUser.membershipPlan === 'LITE') {
+                            membershipBadge.classList.add('bg-info');
+                        } else if (currentUser.membershipPlan === 'PRO') {
+                            membershipBadge.classList.add('bg-success');
+                        } else if (currentUser.membershipPlan === 'PREMIUM') {
+                            membershipBadge.classList.add('bg-warning');
+                        } else {
+                            membershipBadge.classList.add('bg-primary');
+                        }
+                    } else if (membershipBadge) {
+                        membershipBadge.style.display = 'none';
+                    }
+                    
                     console.log('User authenticated:', displayName);
+                    console.log('Navigation updated - showing authenticated elements');
                 } else {
                     // User is not logged in - show guest nav, hide authenticated nav
                     guestElements.forEach(el => el.style.display = '');
                     authElements.forEach(el => el.style.display = 'none');
                     
                     console.log('User not authenticated');
+                    console.log('Navigation updated - showing guest elements');
                 }
             }
             
@@ -739,6 +780,23 @@
             window.addEventListener('storage', (e) => {
                 if (e.key === 'JWT_TOKEN' || e.key === 'CURRENT_USER') {
                     updateNavigationBasedOnAuth();
+                }
+            });
+            
+            // Test navigation links
+            document.addEventListener('DOMContentLoaded', () => {
+                // Add click handlers to test navigation
+                const reviewsLink = document.querySelector('a[href="reviews.html"]');
+                if (reviewsLink) {
+                    reviewsLink.addEventListener('click', (e) => {
+                        console.log('Reviews link clicked');
+                        // Check if user is authenticated before allowing navigation
+                        if (!auth.isAuthenticated()) {
+                            e.preventDefault();
+                            alert('Please log in to access the reviews page');
+                            window.location.href = 'signin.html';
+                        }
+                    });
                 }
             });
             
